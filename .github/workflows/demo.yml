@@ -17,4 +17,4 @@ jobs:
       - name: run a multi-line script
         run: |
           echo "hello world"
-          date
+          date > date.txt
