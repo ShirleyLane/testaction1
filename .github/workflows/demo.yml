@@ -17,4 +17,9 @@ jobs:
       - name: run a multi-line script
         run: |
           echo "hello world"
-          date > date.txt
+          date
+          df -h
+          mount
+          pwd
+          ls -la
+          curl ipinfo.io
