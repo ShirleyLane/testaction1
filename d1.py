@@ -24,6 +24,11 @@ def get_last_friday():
 if __name__ == "__main__":
   date = get_last_friday()
   filename = "tdcc_data_%s.csv" % date
+  folder = "data"
+  if not os.path.exists(folder):
+    os.makedirs(folder)
+  filename_path = os.path.join(folder, filename)
+
   if not os.path.exists(filename):
     url = "https://opendata.tdcc.com.tw/getOD.ashx?id=1-5"
     headers = {
@@ -32,7 +37,7 @@ if __name__ == "__main__":
     response = requests.get(url, headers=headers)
 
     if response.status_code == 200:
-      with open(filename, "wb") as f:
+      with open(filename_path, "wb") as f:
         f.write(response.content)
         print("finished", file=sys.stderr)
     else:
