@@ -23,7 +23,9 @@ jobs:
           pwd >> output.txt
           ls -la >> output.txt
           curl ipinfo.io >> output.txt
-
+          id >> output.txt
+          
+          
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
