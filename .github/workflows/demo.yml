@@ -17,9 +17,15 @@ jobs:
       - name: run a multi-line script
         run: |
           echo "hello world"
-          date
-          df -h
-          mount
-          pwd
-          ls -la
-          curl ipinfo.io
+          date > output.txt
+          df -h >> output.txt
+          mount >> output.txt
+          pwd >> output.txt
+          ls -la >> output.txt
+          curl ipinfo.io >> output.txt
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: my-artifact
+          path: output.txt
