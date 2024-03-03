@@ -29,7 +29,7 @@ if __name__ == "__main__":
     os.makedirs(folder)
   filename_path = os.path.join(folder, filename)
 
-  if not os.path.exists(filename):
+  if not os.path.exists(filename_path):
     url = "https://opendata.tdcc.com.tw/getOD.ashx?id=1-5"
     headers = {
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_3_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.3.1 Safari/605.1.15"
