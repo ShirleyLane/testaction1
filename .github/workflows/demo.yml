@@ -6,7 +6,7 @@ on:
                                       
 jobs:
   job1:
-                                      
+    if: false
     # it is a runner
     runs-on: ubuntu-latest
                                       
@@ -24,10 +24,21 @@ jobs:
           ls -la >> output.txt
           curl ipinfo.io >> output.txt
           id >> output.txt
-          
-          
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
           name: my-artifact
           path: output.txt
+
+  job2:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+                                                          
+      - run: |
+          date > generated.txt
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git commit -m "generated"
+          git push
