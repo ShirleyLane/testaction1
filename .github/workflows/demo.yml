@@ -21,3 +21,5 @@ jobs:
         git commit -m "generated"
         git push
 
+    - run: |
+        curl -X POST -H 'Content-type: application/json' ${{ secrets.SLACK_WEBHOOKS_URL }} --data '{"text":"GA時間到執行完畢"}'
