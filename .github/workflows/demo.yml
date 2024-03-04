@@ -3,38 +3,15 @@ name: workflow1
 # triggers
 on:
   workflow_dispatch: # manually trigger
-                                      
+
+permissions:
+  contents: write
+
 jobs:
   job1:
-    if: false
-    # it is a runner
-    runs-on: ubuntu-latest
-                                      
-    steps:
-      - name: run a single-line script
-        run: echo hello world!
-        
-      - name: run a multi-line script
-        run: |
-          echo "hello world"
-          date > output.txt
-          df -h >> output.txt
-          mount >> output.txt
-          pwd >> output.txt
-          ls -la >> output.txt
-          curl ipinfo.io >> output.txt
-          id >> output.txt
-      - name: Upload artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: my-artifact
-          path: output.txt
-
-  job2:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-                                                          
       - run: |
           date > generated.txt
           git config user.name github-actions
