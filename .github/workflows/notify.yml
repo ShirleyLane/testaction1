@@ -1,0 +1,13 @@
+name: test slack
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  job1:
+    name: test
+    runs-on: ubuntu-latest
+
+    steps:
+    - run: |
+        curl -X POST -H 'Content-type: application/json' ${{ secrets.SLACK_WEBHOOKS_URL }} --data '{"text":"Hello, World!"}'
