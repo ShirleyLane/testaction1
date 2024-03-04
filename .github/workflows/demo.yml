@@ -2,7 +2,6 @@ name: Experiment
 on: 
   schedule:
     - cron: '23 * * * *'
-    - cron: '*/6 * * * *'
 
   workflow_dispatch:
 
