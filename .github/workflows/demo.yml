@@ -1,9 +1,11 @@
 name: workflow1
-                                      
-# triggers
-on:
-  workflow_dispatch: # manually trigger
 
+on:
+  schedule:
+    - cron: '0,10,20,30,40,50 * * * *'
+    
+  workflow_dispatch:
+  
 permissions:
   contents: write
 
@@ -13,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: |
-          date > generated.txt
+          date >> generated.txt
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add .
