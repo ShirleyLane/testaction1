@@ -4,21 +4,21 @@ import os
 
 def get_last_friday():
   from datetime import datetime, timedelta
-                                                              
-  #today = datetime.today() - timedelta(days=2)
-  today = datetime.today()
-  #print(today)
-                                                              
+  import pytz
+
+  tz = pytz.timezone('Asia/Taipei')
+  today = datetime.now(tz)
+
   weekday = today.weekday()
-                                                              
+
   if weekday == 4:
     last_friday = today - timedelta(days=7)
   else:
     days_to_last_friday = (weekday - 4 + 7) % 7
     last_friday = today - timedelta(days=days_to_last_friday)
-                                                              
+
   last_friday_formatted = last_friday.strftime("%Y%m%d")
-  return(last_friday_formatted)
+  return last_friday_formatted
 
 def choose_a_user_agent():
   import random
