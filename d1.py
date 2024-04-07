@@ -1,24 +1,28 @@
 import requests
 import sys
 import os
+from datetime import datetime, timedelta
+import pytz
 
-def get_last_friday():
-  from datetime import datetime, timedelta
-  import pytz
 
-  tz = pytz.timezone('Asia/Taipei')
-  today = datetime.now(tz)
+def get_last_friday(date, num_weeks=0):
+  """
+  找前N個星期五
+  """
 
-  weekday = today.weekday()
+  weekday = date.weekday()
 
-  if weekday == 4:
-    last_friday = today - timedelta(days=7)
-  else:
-    days_to_last_friday = (weekday - 4 + 7) % 7
-    last_friday = today - timedelta(days=days_to_last_friday)
+  last_friday_offset = (weekday+2)%7 + 1
 
-  last_friday_formatted = last_friday.strftime("%Y%m%d")
-  return last_friday_formatted
+  
+  previous_friday_offset = last_friday_offset + num_weeks * 7
+  previous_friday = date - timedelta(days = previous_friday_offset)
+  print(previous_friday)
+  previous_friday_formatted = previous_friday.strftime("%Y%m%d")
+  return previous_friday_formatted
+
+
+
 
 def choose_a_user_agent():
   import random
@@ -55,8 +59,16 @@ def choose_a_user_agent():
 
 
 if __name__ == "__main__":
-  date = get_last_friday()
+  tz = pytz.timezone('Asia/Taipei')
+  now = datetime.now(tz)
+
+  date = get_last_friday(now)
+
+  # date = get_last_friday()
   filename = "tdcc_data_%s.csv" % date
+
+  # print(filename)
+  # sys.exit(0)
   folder = "data"
   if not os.path.exists(folder):
     os.makedirs(folder)
