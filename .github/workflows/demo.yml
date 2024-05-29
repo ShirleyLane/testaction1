@@ -1,7 +1,7 @@
 name: Experiment
 on: 
   schedule:
-    - cron: '0 */2 * * *'
+    - cron: '0 */6 * * 5'
 
   workflow_dispatch:
 
@@ -15,6 +15,7 @@ jobs:
 
     - run: |
         date -u >> generated.txt
+        python3 d1.py
         git config user.name github-actions
         git config user.email github-actions@github.com
         git add .
@@ -22,4 +23,4 @@ jobs:
         git push
 
     - run: |
-        curl -X POST -H 'Content-type: application/json' ${{ secrets.SLACK_WEBHOOKS_URL }} --data '{"text":"GA時間到執行完畢"}'
+        curl -X POST -H 'Content-type: application/json' ${{ secrets.SLACK_WEBHOOKS_URL }} --data '{"text":"股東人數取得完畢"}'
